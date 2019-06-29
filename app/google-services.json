@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "556357525287",
+    "firebase_url": "https://wassupv2-71f60.firebaseio.com",
+    "project_id": "wassupv2-71f60",
+    "storage_bucket": "wassupv2-71f60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556357525287:android:2b00e9d07d5c99c5",
+        "android_client_info": {
+          "package_name": "com.example.wassupv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556357525287-fmmpmgn0cv999djh9i5v6b9cg10pbtpc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpH_WiCytSunGY8sb-mDnFY_7IL9DV1xE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556357525287-fmmpmgn0cv999djh9i5v6b9cg10pbtpc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
