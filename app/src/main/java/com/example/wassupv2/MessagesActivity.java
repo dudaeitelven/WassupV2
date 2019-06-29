@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
 import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
 import com.xwray.groupie.ViewHolder;
 
 import java.util.List;
@@ -37,15 +39,16 @@ public class MessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messages);
 
         RecyclerView rv = findViewById(R.id.recycler_contact);
-        rv.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new GroupAdapter();
         rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
         verifyAuthentication();
 
         fetchLastMessage();
     }
+
 
     private void fetchLastMessage() {
         String uid = FirebaseAuth.getInstance().getUid();
