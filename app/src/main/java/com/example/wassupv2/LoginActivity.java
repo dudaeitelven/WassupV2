@@ -1,6 +1,7 @@
 package com.example.wassupv2;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEditPassword;
     private Button mBtnEnter;
     private TextView mTxtAccount;
+    private ProgressDialog mpgsBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
                 Log.i("Teste", email);
                 Log.i("Teste", password);
 
+                showLoadingDialog();
+
                 if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Nome, senha e email devem ser preenchidos", Toast.LENGTH_SHORT).show();
                     return;
@@ -54,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 Log.i("Teste", task.getResult().getUser().getUid());
+
 
                                 Intent intent = new Intent(LoginActivity.this, MessagesActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -67,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         });
+                dismissLoadingDialog();
             }
         });
 
@@ -78,4 +85,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void showLoadingDialog() {
+        if (mpgsBar == null) {
+            mpgsBar = new ProgressDialog(this);
+            mpgsBar.setTitle(getString(R.string.loading_title));
+            mpgsBar.setMessage(getString(R.string.loading_message));
+        }
+        mpgsBar.show();
+    }
+
+    public void dismissLoadingDialog() {
+        if (mpgsBar != null && mpgsBar.isShowing()) {
+            mpgsBar.dismiss();
+        }
+    }
+
 }
