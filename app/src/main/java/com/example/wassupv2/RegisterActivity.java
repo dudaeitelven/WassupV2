@@ -111,6 +111,8 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.i("Teste", task.getResult().getUser().getUid());
 
                             saveUserInFirebase();
+
+                            Toast.makeText(RegisterActivity.this, "Usuario cadastrado comsucesso!", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -119,6 +121,8 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.i("Teste", e.getMessage());
+
+                        Toast.makeText(RegisterActivity.this, "Falha ao cadastrar usuario!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

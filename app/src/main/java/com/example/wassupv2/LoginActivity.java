@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.i("Teste", e.getMessage());
-
+                                Toast.makeText(LoginActivity.this, "Falha ao tentar logar!", Toast.LENGTH_SHORT).show();
                             }
                         });
                 dismissLoadingDialog();
