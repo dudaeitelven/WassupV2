@@ -14,9 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -47,11 +49,25 @@ public class MessagesActivity extends AppCompatActivity {
         verifyAuthentication();
 
         fetchLastMessage();
+
+//        adapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(@NonNull Item item, @NonNull View view) {
+//                //Intent intent = new Intent(MessagesActivity.this, ChatActivity.class);
+//
+//               Contact contact = ((ContactItem) item).contact;
+//
+//                //intent.putExtra("user", userItem.user);
+//                Toast.makeText(MessagesActivity.this, "U: " + contact.getUuid(), Toast.LENGTH_SHORT).show();
+//                //startActivity(intent);
+//            }
+//        });
+
     }
 
 
     private void fetchLastMessage() {
-        String uid = FirebaseAuth.getInstance().getUid();
+        final String uid = FirebaseAuth.getInstance().getUid();
         if (uid == null) return;
 
 
