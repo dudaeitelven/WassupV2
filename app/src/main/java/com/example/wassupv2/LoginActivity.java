@@ -89,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
     public void showLoadingDialog() {
         if (mpgsBar == null) {
             mpgsBar = new ProgressDialog(this);
-            mpgsBar.setTitle(getString(R.string.loading_title));
-            mpgsBar.setMessage(getString(R.string.loading_message));
+            //mpgsBar.setTitle(getString(R.string.loading_title));
+            //mpgsBar.setMessage(getString(R.string.loading_message));
         }
         mpgsBar.show();
     }
