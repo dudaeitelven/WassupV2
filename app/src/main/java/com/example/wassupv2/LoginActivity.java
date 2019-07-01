@@ -19,6 +19,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Nome, senha e email devem ser preenchidos", Toast.LENGTH_SHORT).show();
+                    dismissLoadingDialog();
                     return;
                 }
 
@@ -75,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 dismissLoadingDialog();
             }
         });
+
 
         mTxtAccount.setOnClickListener(new View.OnClickListener() {
             @Override

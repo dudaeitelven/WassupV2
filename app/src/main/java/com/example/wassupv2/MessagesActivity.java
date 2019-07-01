@@ -50,18 +50,14 @@ public class MessagesActivity extends AppCompatActivity {
 
         fetchLastMessage();
 
-//        adapter.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(@NonNull Item item, @NonNull View view) {
-//                //Intent intent = new Intent(MessagesActivity.this, ChatActivity.class);
-//
-//               Contact contact = ((ContactItem) item).contact;
-//
-//                //intent.putExtra("user", userItem.user);
-//                Toast.makeText(MessagesActivity.this, "U: " + contact.getUuid(), Toast.LENGTH_SHORT).show();
-//                //startActivity(intent);
-//            }
-//        });
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull Item item, @NonNull View view) {
+
+                fetchUser(((ContactItem) item).contact.getUsername());
+
+            }
+        });
 
     }
 
@@ -84,8 +80,38 @@ public class MessagesActivity extends AppCompatActivity {
                                 if (doc.getType() == DocumentChange.Type.ADDED) {
                                     Contact contact = doc.getDocument().toObject(Contact.class);
 
-                                    adapter.add(new ContactItem(contact));
+                                    adapter.add(new ContactItem(contact));//, fetchUser(contact.getUsername())));
                                 }
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void fetchUser(final String userName) {
+
+        FirebaseFirestore.getInstance().collection("/users")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null) {
+                            Log.e("Teste", e.getMessage(), e);
+                            return;
+                        }
+
+                        List<DocumentSnapshot> docs = queryDocumentSnapshots.getDocuments();
+
+                        for (DocumentSnapshot doc: docs) {
+                            if(doc.toObject(User.class).getUsername().equals(userName)){
+                                User uUser = doc.toObject(User.class);
+
+                                Intent intent = new Intent(MessagesActivity.this, ChatActivity.class);
+
+                                intent.putExtra("user", uUser);
+
+                                startActivity(intent);
+
+                                break;
                             }
                         }
                     }
@@ -127,7 +153,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         private final Contact contact;
 
-        private ContactItem(Contact contact) {
+        private ContactItem(Contact contact){
             this.contact = contact;
         }
 
